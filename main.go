@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -13,6 +14,7 @@ import (
 )
 
 func main() {
+	fmt.Println(zip_streamer.EncryptIt([]byte(`{"suggestedFilename": "test.zip","files": [{"url":"https://bdih-download.endress.com/files/DLA/005056A500261EDBA3B20CB718C6B6D5/BA01854TEN_0420.pdf","zipPath":"Test1.pdf"}]}`), os.Getenv("ZIP_STREAMER_KEY_PHRASE")))
 	zipServer := zip_streamer.NewServer()
 	zipServer.Compression = (os.Getenv("ZS_COMPRESSION") == "DEFLATE")
 	zipServer.ListfileUrlPrefix = os.Getenv("ZS_LISTFILE_URL_PREFIX")

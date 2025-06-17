@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/google/uuid"
@@ -63,14 +64,17 @@ func (s *Server) HandleCreateLink(w http.ResponseWriter, req *http.Request) {
 }
 
 func (s *Server) parseZipRequest(w http.ResponseWriter, req *http.Request) (*ZipDescriptor, error) {
+	keyPhrase := os.Getenv("ZIP_STREAMER_KEY_PHRASE")
 	body, err := ioutil.ReadAll(req.Body)
+	decryptedBody := DecryptIt(string(body), keyPhrase)
+
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(`{"status":"error","error":"missing body"}`))
 		return nil, err
 	}
 
-	ZipDescriptor, err := UnmarshalJsonZipDescriptor(body)
+	ZipDescriptor, err := UnmarshalJsonZipDescriptor([]byte(decryptedBody))
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(`{"status":"error","error":"invalid body"}`))
