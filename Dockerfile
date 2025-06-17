@@ -1,5 +1,6 @@
 # syntax=docker/dockerfile:1
-FROM golang:1.19-buster as builder
+FROM golang:1.24-bookworm as builder
+ENV CGO_ENABLED=0
 
 # Create and change to the app directory.
 WORKDIR /go/src/github.com/scosman/zipstreamer
