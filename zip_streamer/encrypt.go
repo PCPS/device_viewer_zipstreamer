@@ -19,7 +19,7 @@ func EncryptIt(value []byte, keyPhrase string) string {
 	if err != nil {
 	 fmt.Println(err)
 	}
-	nonce := make([]byte, 16)
+	nonce := make([]byte, gcmInstance.NonceSize())
 	_, _ = io.ReadFull(rand.Reader, nonce)
 	cipheredText := gcmInstance.Seal(nonce, nonce, value, nil)
 	enc := hex.EncodeToString(cipheredText)
@@ -37,11 +37,11 @@ func DecryptIt(ciphered string, keyPhrase string) string {
 	if err != nil {
 		fmt.Println("Error creating GCM instance: ", err)
 	}
-	nonceSize := 16
+	nonceSize := gcmInstance.NonceSize()
 	nonce, cipheredText := decodedCipherText[:nonceSize], decodedCipherText[nonceSize:]
 	fmt.Println(nonce)
 	fmt.Println(cipheredText)
-	decryptedText, err := gcmInstance.Open(nil, []byte(nonce), cipheredText, nil)
+	decryptedText, err := gcmInstance.Open(nil, nonce, cipheredText, nil)
 	fmt.Println(decryptedText)
 	if err != nil {
 		fmt.Println("Error decrypting text: ", err)
