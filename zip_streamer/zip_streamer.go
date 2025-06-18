@@ -38,10 +38,8 @@ func (z *ZipStream) StreamAllFiles() error {
 
 	for _, entry := range z.entries {
 		url := fmt.Sprintf("%s?callerId=%s", entry.Url().String(), callerId)
-		fmt.Println(url)
 		resp, err := http.Get(url)
-		fmt.Println(resp.StatusCode)
-		
+
 		if err != nil {
 			continue
 		}
