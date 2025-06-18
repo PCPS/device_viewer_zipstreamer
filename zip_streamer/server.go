@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/google/uuid"
@@ -63,7 +64,7 @@ func (s *Server) HandleCreateLink(w http.ResponseWriter, req *http.Request) {
 }
 
 func (s *Server) parseZipRequest(w http.ResponseWriter, req *http.Request) (*ZipDescriptor, error) {
-	keyPhrase := "x7yWvQxuZOAbdDeO0fUUL0KA2K4nNG9n"
+	keyPhrase := os.Getenv("ZIP_STREAMER_KEY_PHRASE")
 	body, err := ioutil.ReadAll(req.Body)
 	decryptedBody := DecryptIt(string(body), keyPhrase)
 
