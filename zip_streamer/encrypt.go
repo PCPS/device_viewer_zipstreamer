@@ -3,22 +3,14 @@ package zip_streamer
 import (
 	"crypto/aes"
 	"crypto/cipher"
-	"crypto/md5"
 	"crypto/rand"
 	"encoding/hex"
 	"fmt"
 	"io"
 )
 
-func mdHashing(input string) string {
-	byteInput := []byte(input)
-	md5Hash := md5.Sum(byteInput)
-	return hex.EncodeToString(md5Hash[:]) // by referring to it as a string
-   }
-
 func EncryptIt(value []byte, keyPhrase string) string {
-
-	aesBlock, err := aes.NewCipher([]byte(mdHashing(keyPhrase)))
+	aesBlock, err := aes.NewCipher([]byte(keyPhrase))
 	if err != nil {
 	 fmt.Println(err)
 	}
@@ -36,8 +28,7 @@ func EncryptIt(value []byte, keyPhrase string) string {
 
 func DecryptIt(ciphered string, keyPhrase string) string {
 	decodedCipherText, err := hex.DecodeString(ciphered)
-	hashedPhrase := mdHashing(keyPhrase)
-	aesBlock, err := aes.NewCipher([]byte(hashedPhrase))
+	aesBlock, err := aes.NewCipher([]byte(keyPhrase))
 	if err != nil {
 		fmt.Println("Error creating AES block: ", err)
 	}
