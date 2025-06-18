@@ -42,6 +42,7 @@ func DecryptIt(ciphered string, keyPhrase string) string {
 	fmt.Println(nonce)
 	fmt.Println(cipheredText)
 	decryptedText, err := gcmInstance.Open(nil, nonce, cipheredText, nil)
+	fmt.Println(decryptedText)
 	if err != nil {
 		fmt.Println("Error decrypting text: ", err)
 	}
