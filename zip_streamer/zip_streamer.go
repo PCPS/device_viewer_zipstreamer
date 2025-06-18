@@ -5,6 +5,7 @@ import (
 	"errors"
 	"io"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -32,9 +33,10 @@ func NewZipStream(entries []*FileEntry, w io.Writer) (*ZipStream, error) {
 func (z *ZipStream) StreamAllFiles() error {
 	zipWriter := zip.NewWriter(z.destination)
 	success := 0
+	callerId := os.Getenv("CALLER_ID")
 
 	for _, entry := range z.entries {
-		resp, err := http.Get(entry.Url().String())
+		resp, err := http.Get(entry.Url().String() + "?callerId=" + callerId)
 		if err != nil {
 			continue
 		}

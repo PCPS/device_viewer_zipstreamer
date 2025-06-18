@@ -8,7 +8,6 @@ import (
 	"encoding/hex"
 	"fmt"
 	"io"
-	"log"
 )
 
 func mdHashing(input string) string {
@@ -40,17 +39,17 @@ func DecryptIt(ciphered string, keyPhrase string) string {
 	hashedPhrase := mdHashing(keyPhrase)
 	aesBlock, err := aes.NewCipher([]byte(hashedPhrase))
 	if err != nil {
-		log.Fatalln("Error creating AES block: ", err)
+		fmt.Println("Error creating AES block: ", err)
 	}
 	gcmInstance, err := cipher.NewGCM(aesBlock)
 	if err != nil {
-		log.Fatalln("Error creating GCM instance: ", err)
+		fmt.Println("Error creating GCM instance: ", err)
 	}
 	nonceSize := gcmInstance.NonceSize()
 	nonce, cipheredText := decodedCipherText[:nonceSize], decodedCipherText[nonceSize:]
 	decryptedText, err := gcmInstance.Open(nil, nonce, cipheredText, nil)
 	if err != nil {
-		log.Fatalln("Error decrypting text: ", err)
+		fmt.Println("Error decrypting text: ", err)
 	}
 	return string(decryptedText)
 }
