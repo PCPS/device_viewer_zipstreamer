@@ -38,13 +38,35 @@ func (z *ZipStream) StreamAllFiles() error {
 
 	for _, entry := range z.entries {
 		url := fmt.Sprintf("%s?callerId=%s", entry.Url().String(), callerId)
-		resp, err := http.Get(url)
+		client := http.Client{
+			Timeout: 10 * time.Second,
+		}
+		resp, err := client.Get(url)
 
 		if err != nil {
 			continue
 		}
 		defer resp.Body.Close()
+
 		if resp.StatusCode != http.StatusOK {
+			header := &zip.FileHeader{
+				Name:     fmt.Sprintf("error_%s.txt", entry.ZipPath()),
+				Method:   z.CompressionMethod,
+				Modified: time.Now(),
+			}
+			entryWriter, err := zipWriter.CreateHeader(header)
+			if err != nil {
+				return err
+			}
+			_, err = io.WriteString(entryWriter, fmt.Sprintf("Failed to download: %s\n", entry.Url().String()))
+			if err != nil {
+				return err
+			}
+			zipWriter.Flush()
+			flushingWriter, ok := z.destination.(http.Flusher)
+			if ok {
+				flushingWriter.Flush()
+			}
 			continue
 		}
 
@@ -62,7 +84,7 @@ func (z *ZipStream) StreamAllFiles() error {
 		if err != nil {
 			return err
 		}
-
+			
 		zipWriter.Flush()
 		flushingWriter, ok := z.destination.(http.Flusher)
 		if ok {
@@ -75,6 +97,6 @@ func (z *ZipStream) StreamAllFiles() error {
 	if success == 0 {
 		return errors.New("empty file - all files failed")
 	}
-
+		
 	return zipWriter.Close()
 }
