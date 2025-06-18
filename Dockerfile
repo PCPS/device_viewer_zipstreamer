@@ -3,7 +3,6 @@ FROM golang:1.24-bookworm as builder
 ENV CGO_ENABLED=0
 # This is just for testing it locally, should be set to heroku Env variable when deployed.
 ENV ZIP_STREAMER_KEY_PHRASE=1234567890
-ENV CALLER_ID=2R0npxzCS9Hfs2iY5HX1
 
 # Create and change to the app directory.
 WORKDIR /go/src/github.com/scosman/zipstreamer

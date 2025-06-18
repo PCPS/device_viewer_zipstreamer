@@ -15,43 +15,23 @@ import (
 
 func main() {
 	fmt.Println(zip_streamer.EncryptIt([]byte(`{
-  "suggestedFilename": "W409101448A_2025_06_18_08_51_12.zip",
+  "suggestedFilename": "M3103D05G00_2025_06_18_08_58_11.zip",
   "files": [
     {
-      "url": "https://bdih-download.endress.com/files/DLA/005056A500261ED9A8AE4899E53AAC0C/TI01442TPT_0118.pdf",
-      "zipPath": "Technical_information/PT/TI01442TPT_0118.pdf"
+      "url": "https://bdih-download.endress.com/files/DRAWXL/0200030000091EE780CB28DE020FA596/CM42-OAA100EAD01!71329995!D!160603.PDF",
+      "zipPath": "Operating_instruction/DE/CM42-OAA100EAD01_71329995_D_160603.PDF"
     },
     {
-      "url": "https://bdih-download.endress.com/files/DLA/005056A500261ED9A8AE49FA1B53EC0E/TI01442TES_0118.pdf",
-      "zipPath": "Technical_information/ES/TI01442TES_0118.pdf"
+      "url": "https://bdih-download.endress.com/files/DRAWXL/0200030000091ED785BD6A5F937C06C3/M3103D05G00_PFCC_A2_71212267.pdf",
+      "zipPath": "Factory_calibration_certificate/EN/M3103D05G00_PFCC_A2_71212267.pdf"
     },
     {
-      "url": "https://bdih-download.endress.com/files/DLA/005056A500261ED9B2AFD71708DE363F/TI01442TRU_0118.pdf",
-      "zipPath": "Technical_information/RU/TI01442TRU_0118.pdf"
+      "url": "https://bdih-download.endress.com/files/DRAWXL/0200030000091ED785BD6A5F937C06C3/M3103D05G00_PFCC_A2_71212267.pdf",
+      "zipPath": "Factory_calibration_certificate/DE/M3103D05G00_PFCC_A2_71212267.pdf"
     },
     {
-      "url": "https://bdih-download.endress.com/files/DLA/005056A500261ED9A8AE4964BABF2C0E/TI01442TFR_0118.pdf",
-      "zipPath": "Technical_information/FR/TI01442TFR_0118.pdf"
-    },
-    {
-      "url": "https://bdih-download.endress.com/files/DLA/005056A500261ED9A8AE4AB73422CC11/TI01442TJA_0118.pdf",
-      "zipPath": "Technical_information/JA/TI01442TJA_0118.pdf"
-    },
-    {
-      "url": "https://bdih-download.endress.com/files/DLA/005056A500261ED997E92C8D8CDCD5BE/TI01442TDE_0118.pdf",
-      "zipPath": "Technical_information/DE/TI01442TDE_0118.pdf"
-    },
-    {
-      "url": "https://bdih-download.endress.com/files/DLA/005056A500261EDAA4EA81BC1A6F0ED9/TI01442TPL_0118.pdf",
-      "zipPath": "Technical_information/PL/TI01442TPL_0118.pdf"
-    },
-    {
-      "url": "https://bdih-download.endress.com/files/DLA/005056A500261ED997E92DB88877F5C1/TI01442TEN_0118.pdf",
-      "zipPath": "Technical_information/EN/TI01442TEN_0118.pdf"
-    },
-    {
-      "url": "https://bdih-download.endress.com/files/DLA/005056A500261ED9B2AFD7E6E4125642/TI01442TIT_0118.pdf",
-      "zipPath": "Technical_information/IT/TI01442TIT_0118.pdf"
+      "url": "https://bdih-download.endress.com/files/DRAWXL/0200030000091EE780CB290467CDC596/CM42-OAA100EAD01!71329994!D!140616.PDF",
+      "zipPath": "Operating_instruction/DE/CM42-OAA100EAD01_71329994_D_140616.PDF"
     }
   ]
 }`), os.Getenv("ZIP_STREAMER_KEY_PHRASE")))

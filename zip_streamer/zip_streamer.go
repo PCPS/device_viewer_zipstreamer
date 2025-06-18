@@ -3,6 +3,7 @@ package zip_streamer
 import (
 	"archive/zip"
 	"errors"
+	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -36,7 +37,11 @@ func (z *ZipStream) StreamAllFiles() error {
 	callerId := os.Getenv("CALLER_ID")
 
 	for _, entry := range z.entries {
-		resp, err := http.Get(entry.Url().String() + "?callerId=" + callerId)
+		url := fmt.Sprintf("%s?callerId=%s", entry.Url().String(), callerId)
+		fmt.Println(url)
+		resp, err := http.Get(url)
+		fmt.Println(resp.StatusCode)
+		
 		if err != nil {
 			continue
 		}
