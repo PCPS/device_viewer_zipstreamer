@@ -2,14 +2,12 @@ package zip_streamer
 
 import (
 	"archive/zip"
-	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"time"
 
-	"github.com/google/uuid"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
